@@ -18,7 +18,10 @@ jobs:
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-gems-
-
+      - name: Add Remote Repo
+        run: |
+         git remote remove origin
+         git remote add origin ${{ secrets.PAGES_REPO_NWO }}
       # Use GitHub Deploy Action to build and deploy to Github
       - uses: jeffreytse/jekyll-deploy-action@v0.3.0
         with:
